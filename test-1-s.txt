@@ -6,13 +6,10 @@ max-rand-speed: 60
 max-rand-health: 1
 ---
 round: 1
-random-zombies: 30
-named-zombies: 3
-Medha distance: 150 speed: 300 health: 15
-Aekka distance: 2 speed: 3 health: 6
-Name distance: 100 speed: 1 health: 3
+random-zombies: 10
+named: 0
 ---
 round: 3
 random-zombies: 10
-named-zombies: 1
-JamesDuderstadt distance: 20 speed: 10 health: 20
+named: 0
+---

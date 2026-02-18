@@ -79,9 +79,10 @@ class ZombHolder{
     void statsPrint();
     bool areDead = false;
     uint32_t roundNum = 0;
+    uint32_t currentMedian = 0;
     Zombies killer;
     ZombHolder() : verboseMode(false), medianMode(false), statsMode(false), statsNum(0) {}
-
+    uint32_t nextRound = 0; //next round in file
     private:
     bool verboseMode = false;
     bool medianMode = false;
@@ -92,7 +93,6 @@ class ZombHolder{
     priority_queue<Zombies, vector<Zombies>, LeastActive> mostAct;
     priority_queue<Zombies, vector<Zombies>, MostActive> leastAct;
     deque<string> lastDeaths;
-    uint32_t nextRound = 0; //next round in file
     uint32_t quiverCapacity = 0;
     priority_queue<uint32_t, vector<uint32_t>, greater<uint32_t>> highHalf;
     priority_queue<uint32_t> lowHalf;
@@ -178,11 +178,10 @@ void ZombHolder::readRound(){
         }
     }
     cin>>junk;
+    cin>>junk>>nextRound;
     if(cin.fail()){
         nextRound = 0;
         return;
-    }else{
-        cin>>junk>>nextRound;
     }
 }
 
@@ -237,25 +236,13 @@ void ZombHolder::playRound(){
                 }
             }
             if(medianMode){
-                if(lowHalf.empty() && highHalf.empty()){
+                //check median currently 
+                //add to correct heap
+                //check rebalancing
+                if(zombQueue.top()->roundsActive > currentMedian){
                     highHalf.push(zombQueue.top()->roundsActive);
-                    zombQueue.pop();
-                    continue;
-                }
-                if(lowHalf.empty()){
-                    if(zombQueue.top()->roundsActive > highHalf.top()){
-                        uint32_t temp = highHalf.top();
-                        lowHalf.push(temp);
-                        highHalf.pop();
-                        highHalf.push(zombQueue.top()->roundsActive);
-                    }else{
-                        lowHalf.push(zombQueue.top()->roundsActive);
-                    }
-                }
-                if(zombQueue.top()->roundsActive < lowHalf.top()){
-                    lowHalf.push(zombQueue.top()->roundsActive);
                 }else{
-                    highHalf.push(zombQueue.top()->roundsActive);
+                    lowHalf.push(zombQueue.top()->roundsActive);
                 }
                 if(lowHalf.size() > (highHalf.size()+1)){
                     uint32_t temp = lowHalf.top();
@@ -267,20 +254,20 @@ void ZombHolder::playRound(){
                     lowHalf.push(temp);
                     highHalf.pop();
                 }
+                if(highHalf.size() == lowHalf.size()){
+                    currentMedian = (highHalf.top() + lowHalf.top())/2;
+                }else if(highHalf.size() > lowHalf.size()){
+                    currentMedian = highHalf.top();
+                }else{
+                    currentMedian = lowHalf.top();
+                }
+
             }
             zombQueue.pop();
         }
     }
     if(medianMode){
-        uint32_t mean;
-        if(highHalf.size() == lowHalf.size()){
-            mean = (highHalf.top() + lowHalf.top())/2;
-        }else if(highHalf.size() > lowHalf.size()){
-            mean = highHalf.top();
-        }else{
-            mean = lowHalf.top();
-        }
-        cout << "At the end of round " <<roundNum<< ", the median zombie lifetime is " << mean << '\n';
+        cout << "At the end of round " <<roundNum<< ", the median zombie lifetime is " << currentMedian << '\n';
     }
 }
 
@@ -352,7 +339,9 @@ int main(int argc, char** argv){
     simulation.get_options(argc, argv);
     simulation.readHeader();
     //how to properly loop my playRound func
-    
+    while(!simulation.areDead && (!simulation.zombQueue.empty() || simulation.nextRound != 0)){
+        simulation.playRound();
+    }
     if(!simulation.areDead){
         cout<<"VICTORY IN ROUND "<< simulation.roundNum <<"! "<<simulation.killer.name<<" was the last zombie.\n";
     }

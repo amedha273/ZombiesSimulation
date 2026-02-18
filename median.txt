@@ -1,0 +1,30 @@
+if(lowHalf.empty() && highHalf.empty()){
+                    highHalf.push(zombQueue.top()->roundsActive);
+                    zombQueue.pop();
+                    continue;
+                }
+                if(lowHalf.empty()){
+                    if(zombQueue.top()->roundsActive > highHalf.top()){
+                        uint32_t temp = highHalf.top();
+                        lowHalf.push(temp);
+                        highHalf.pop();
+                        highHalf.push(zombQueue.top()->roundsActive);
+                    }else{
+                        lowHalf.push(zombQueue.top()->roundsActive);
+                    }
+                }
+                if(zombQueue.top()->roundsActive < lowHalf.top()){
+                    lowHalf.push(zombQueue.top()->roundsActive);
+                }else{
+                    highHalf.push(zombQueue.top()->roundsActive);
+                }
+                if(lowHalf.size() > (highHalf.size()+1)){
+                    uint32_t temp = lowHalf.top();
+                    highHalf.push(temp);
+                    lowHalf.pop();
+                }
+                if(highHalf.size() > (lowHalf.size()+1)){
+                    uint32_t temp = highHalf.top();
+                    lowHalf.push(temp);
+                    highHalf.pop();
+                }

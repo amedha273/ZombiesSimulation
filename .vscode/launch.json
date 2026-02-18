@@ -11,7 +11,7 @@
             "name": "Debug",
             "program": "${workspaceFolder}/zombbb_debug",
             "args": ["-v", "-s 100", "-m"],
-            "stdio": ["spec.txt", null],
+            "stdio": ["test-1-s.txt", "results.txt", null],
             "cwd": "${workspaceFolder}"
         }
     ]
