@@ -12,4 +12,3 @@ named: 0
 round: 3
 random-zombies: 10
 named: 0
----

@@ -271,10 +271,6 @@ void ZombHolder::playRound(){
     }
 }
 
-bool compare(const Zombies& a, const Zombies& b){
-    return a.name < b.name;
-}
-
 void ZombHolder::statsPrint(){
     if(statsMode){
         uint32_t count = 0;
@@ -292,7 +288,6 @@ void ZombHolder::statsPrint(){
         for(size_t i = 0; i < lastDeaths.size(); ++i){
             cout << lastDeaths[i] << " " << numKilled - static_cast<uint32_t>(i) << "\n";
         }
-
 
         cout << "Most active zombies:\n";
         for(size_t i = 0; i < masterList.size(); ++i){
@@ -338,7 +333,6 @@ int main(int argc, char** argv){
     ZombHolder simulation;
     simulation.get_options(argc, argv);
     simulation.readHeader();
-    //how to properly loop my playRound func
     while(!simulation.areDead && (!simulation.zombQueue.empty() || simulation.nextRound != 0)){
         simulation.playRound();
     }

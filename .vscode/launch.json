@@ -10,8 +10,8 @@
             "request": "launch",
             "name": "Debug",
             "program": "${workspaceFolder}/zombbb_debug",
-            "args": ["-v", "-s 100", "-m"],
-            "stdio": ["test-1-s.txt", "results.txt", null],
+            "args": ["-s 100"],
+            "stdio": ["test-1-s.txt", null],
             "cwd": "${workspaceFolder}"
         }
     ]

@@ -1,0 +1,46 @@
+VICTORY IN ROUND 3! cris12 was the last zombie.
+Zombies still active: 0
+First zombies killed:
+bing4 1
+cris3 2
+darden1 3
+garcia2 4
+paoletti9 5
+potatobot8 6
+noah7 7
+paoletti0 8
+fee6 9
+will5 10
+Last zombies killed:
+cris12 20
+noah16 19
+garcia11 18
+fee15 17
+darden10 16
+will14 15
+potatobot17 14
+paoletti18 13
+darden19 12
+bing13 11
+Most active zombies:
+bing13 1
+bing4 1
+cris12 1
+cris3 1
+darden1 1
+darden10 1
+darden19 1
+fee15 1
+fee6 1
+garcia11 1
+Least active zombies:
+bing13 1
+bing4 1
+cris12 1
+cris3 1
+darden1 1
+darden10 1
+darden19 1
+fee15 1
+fee6 1
+garcia11 1

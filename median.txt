@@ -28,3 +28,12 @@ if(lowHalf.empty() && highHalf.empty()){
                     lowHalf.push(temp);
                     highHalf.pop();
                 }
+
+
+        uint32_t currHealth = zombQueue.top()->health;
+        if(currHealth > quiver){
+            zombQueue.top()->health -= quiver;
+        }else{
+            quiver -= currHealth;
+            zombQueue.top()->health = 0;
+        }

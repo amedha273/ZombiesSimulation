@@ -1,0 +1,20 @@
+# testFile1.txt
+quiver-capacity: 20
+random-seed: 2049231
+max-rand-distance: 150
+max-rand-speed: 2
+max-rand-health: 15
+---
+round: 1
+random-zombies: 10
+named: 2
+Named distance: 150 speed: 2 health: 30
+Named2 distance: 150 speed: 3 health: 30
+---
+round: 3
+random-zombies: 10
+named: 0
+---
+round: 6
+random-zombies: 10
+named: 0
